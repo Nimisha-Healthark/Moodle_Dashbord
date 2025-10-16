@@ -7,6 +7,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 import os
 from docx import Document
+import streamlit as st
 
 # Gmail API scope to send email
 SCOPES = ['https://www.googleapis.com/auth/gmail.send']
