@@ -154,9 +154,7 @@ def posh_reminder(sender_email):
 
 if __name__ == "__main__":
     try:
-        with open(r"credentials\config.json", "r") as f:
-            config = load(f)
-            email_use = config['email']
+        email_use = st.secrets["gmail_sender"]["email"]
     except Exception as e:
         st.error(f"Error: {str(e)}")
             

@@ -13,15 +13,16 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 subject = "Reminder to complete your Moodle Courses"
 
 def authenticate_gmail_sender():
-    """Authenticate and return a Gmail API service for sending."""
-    creds = None
-    if os.path.exists(r'credentials\token.json'):
-        creds = Credentials.from_authorized_user_file(r'credentials\token.json', SCOPES)
-    else:
-        flow = InstalledAppFlow.from_client_secrets_file(r'credentials\credentials.json', SCOPES)
-        creds = flow.run_local_server(port=0)
-        with open(r'credentials\token.json', 'w') as token:
-            token.write(creds.to_json())
+    """Authenticate using Streamlit secrets instead of local files."""
+    token_info = st.secrets["gcp_service_account"]
+    creds = Credentials(
+        token=token_info["token"],
+        refresh_token=token_info["refresh_token"],
+        token_uri=token_info["token_uri"],
+        client_id=token_info["client_id"],
+        client_secret=token_info["client_secret"],
+        scopes=token_info["scopes"]
+    )
     return build('gmail', 'v1', credentials=creds)
 
 def generate_body(name: str, incomplete_courses: list[str]) -> str:
