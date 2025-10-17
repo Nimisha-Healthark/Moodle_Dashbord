@@ -25,7 +25,7 @@ def preprocess_df(df: pd.DataFrame) -> pd.DataFrame:
 
     # Log available columns for debugging
     available_cols = df.columns.tolist()
-    st.write("📊 Columns found in uploaded Excel:", available_cols)
+    #st.write("📊 Columns found in uploaded Excel:", available_cols)
 
     # If expected column missing, show warning and skip filtering
     if expected_col not in df.columns:
