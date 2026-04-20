@@ -45,7 +45,7 @@ def nudge(df: pd.DataFrame, email_send):
 
         # Group by email and user, aggregate incomplete courses
         grouped = (
-            filtered[filtered['Email'].str.lower()] #== TEST_ADDRESS
+            filtered
             .groupby(['Email', 'User'])['Courses']
             .apply(list)
             .reset_index()
